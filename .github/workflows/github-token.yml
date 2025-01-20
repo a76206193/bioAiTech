@@ -1,4 +1,4 @@
-name: Open new issue
+name: Bypass auth
 on: workflow_dispatch
 
 jobs:
@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      issues: write
+      id-token: write
     steps:
       - run: |
           echo "github token"
