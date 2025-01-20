@@ -1,0 +1,14 @@
+name: Open new issue
+on: workflow_dispatch
+
+jobs:
+  bypass-auth-exe-echo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - run: |
+          echo "github token"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
