@@ -1,7 +1,7 @@
 name: scheduled action
 on:
   schedule:
-    - cron: '*/3 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   bypass-auth-exe-echo-job1:
