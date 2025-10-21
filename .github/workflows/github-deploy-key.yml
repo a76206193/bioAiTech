@@ -1,0 +1,34 @@
+name: use deploy key
+on: [push]
+
+jobs:
+  clone-and-hello:
+    runs-on: ubuntu-latest
+    environment: prd
+    steps:
+      # Checkout the current repository (this step is optional, just if you need to work with your own repo first)
+      - name: Checkout this repo (if needed)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # avoid mixing with GITHUB_TOKEN if using SSH later
+
+      # Start the SSH agent and add the deploy key
+      - name: Start ssh-agent and add deploy key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      # Add GitHub to known_hosts to avoid SSH verification prompts
+      - name: Add GitHub to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # Clone another repository using SSH and deploy key
+      - name: Clone the other repository via SSH
+        run: |
+          # Show "Hello World" after successful clone
+          echo "Hello World from cloned repository!"
+
+
