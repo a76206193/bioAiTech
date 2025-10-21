@@ -2,7 +2,7 @@ name: use deploy key
 on: [push]
 
 jobs:
-  clone-and-hello:
+  show-hello:
     runs-on: ubuntu-latest
     environment: prd
     steps:
@@ -13,10 +13,10 @@ jobs:
           persist-credentials: false   # avoid mixing with GITHUB_TOKEN if using SSH later
 
       # Start the SSH agent and add the deploy key
-      - name: Start ssh-agent and add deploy key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+#      - name: Start ssh-agent and add deploy key
+#        uses: webfactory/ssh-agent@v0.9.0
+#        with:
+#          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       # Add GitHub to known_hosts to avoid SSH verification prompts
       - name: Add GitHub to known_hosts
