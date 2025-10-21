@@ -1,4 +1,4 @@
-name: bypass action
+name: approval need action
 on:
   workflow_dispatch:
 

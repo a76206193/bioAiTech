@@ -1,26 +1,26 @@
-#name: scheduled action
-#on:
-#  schedule:
-#    - cron: '*/30 * * * *'
-#
-#jobs:
-#  bypass-auth-exe-echo-job1:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      id-token: write
-#    steps:
-#      - run: |
-#          echo "github token 1"
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#  bypass-auth-exe-echo-job2:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      id-token: write
-#    steps:
-#      - run: |
-#          echo "github token 2"
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+name: scheduled action
+on:
+  #schedule:
+    #- cron: '*/30 * * * *'
+
+jobs:
+  bypass-auth-exe-echo-job1:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - run: |
+          echo "github token 1"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  bypass-auth-exe-echo-job2:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - run: |
+          echo "github token 2"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
