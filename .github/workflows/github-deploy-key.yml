@@ -13,7 +13,7 @@ jobs:
           persist-credentials: false   # avoid mixing with GITHUB_TOKEN if using SSH later
 
       # Start the SSH agent and add the deploy key
-      - name: Start ssh-agent and add deploy key
+      - name: Start ssh-agent and add deploy key try1
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
