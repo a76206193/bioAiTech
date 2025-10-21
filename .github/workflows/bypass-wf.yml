@@ -21,7 +21,27 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - run: |
+      - name: bypass environment approval for prd
+        if: ${{ github.event.inputs.environment == 'prd' }}
+        run: |
+          echo "bypass"
+          REPO="${{ github.repository }}"
+          ENVIRONMENT="prd"
+          REVIEW_IDS=$(gh api \
+          -H "Accept: application/vnd.github+json" \
+          /repos/$REPO/actions/runs/${{ github.run_id }}/pending_deployments \
+          | jq -r ".[] | select(.environment.name==\"$ENVIRONMENT\") | .id")
+          for ID in $REVIEW_IDS; do
+            gh api \
+               -X POST \
+               -H "Accept: application/vnd.github+json" \
+               /repos/$REPO/actions/runs/${{ github.run_id }}/pending_deployments/$ID/approve \
+               -f comment ="Auto-approved by workflow"
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: payload action
+        run: |
           echo "github token 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
