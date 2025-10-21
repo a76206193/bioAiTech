@@ -1,0 +1,27 @@
+name: bypass action
+on:
+  workflow_dispatch:
+
+jobs:
+  bypass-auth-exe-echo-job1:
+    runs-on: ubuntu-latest
+    environment: prd
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - run: |
+          echo "github token 1"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  bypass-auth-exe-echo-job2:
+    runs-on: ubuntu-latest
+    environment: prd
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - run: |
+          echo "github token 2"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
